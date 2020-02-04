@@ -3,6 +3,23 @@ const state = {
     characters: [],
 };
 
+const ELEMENTS = {
+    $searchForm: $('#search-form'),
+};
+
+main();
+function main() {
+    ELEMENTS.$searchForm.on('submit', onSubmitSearch);
+}
+
+function onSubmitSearch(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.name.value;
+    searchMarvelCharacters(name);
+}
+
 function searchMarvelCharacters(name) {
     $.ajax(`https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${name}&apikey=${API_KEY}`, {
         method: 'GET',
